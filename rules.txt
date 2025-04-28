@@ -1,0 +1,5 @@
+Nice one I found: B345678/S12345	->holy.txt
+komoly: B12345678/S23			->niceHighlife.txt
+Conway: B3/S23 				->nice.txt
+HighLife:B36/S23			->niceHighlife.txt
+Day and Night:B3678/S34678		->dayandnight.txt

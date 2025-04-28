@@ -1,0 +1,88 @@
+@startuml
+
+class Cell {
+    - row: int
+    - column: int
+    - alive: boolean
+    - should_live: boolean
+    - button: CellButton
+    + Cell(r: int, c: int)
+    + Cell(r: int, c: int, b: boolean)
+    + getColumn(): int
+    + getButton(): CellButton
+    + getRow(): int
+    + isAlive(): boolean
+    + setAlive(alive: boolean): void
+    + setButton(button: CellButton): void
+    + isShould_live(): boolean
+    + setFate(fate: boolean): void
+}
+
+class CellButton {
+    - cell: Cell
+    + CellButton(cell: Cell)
+    + updateAppearance(): void
+    + getCell(): Cell
+}
+
+class CellMap {
+    - cellmap: HashMap<String, Cell>
+    + CellMap()
+    + addCell(m: CellMap, c: Cell): void
+    + getCell(row: int, column: int): Cell
+    + clearCells(): void
+    + getKey(row: int, column: int): String
+    + count_live_neighbors(m: CellMap, key: String): int
+    + countCellsInRow(row: int): int
+    + saveToFile(filename: String): void
+    + loadFromFile(filename: String): CellMap
+}
+
+class Rules {
+    - birthRules: int[]
+    - survivalRules: int[]
+    + Rules(ruleString: String)
+    + parseRules(ruleString: String): void
+    + parseRulePart(rulePart: String): int[]
+    + shouldLive(currentState: boolean, liveNeighbors: int): boolean
+    + getBirthRules(): int[]
+    + getSurvivalRules(): int[]
+}
+
+class GridFrame {
+    - map: CellMap
+    - gridPanel: JPanel
+    - controlPanel: JPanel
+    - sizeTextField: JTextField
+    - ruleTextField: JTextField
+    - running: boolean
+    - simulationThread: Thread
+    + GridFrame()
+    + loadGrid(): void
+    + generateGrid(): void
+    + startSimulation(): void
+    + stopSimulation(): void
+    + isSimulationRunning(): boolean
+    + setCellMap(cellMap: CellMap): void
+    + getGridPanel(): JPanel
+    + getControlPanel(): JPanel
+    + main(args: String[]): void
+}
+
+Cell --> CellButton: has
+
+GridFrame <--> CellMap
+
+GridFrame ..> Rules
+
+CellButton <|-- JButton
+
+Rules <|.. Interface
+
+Cell o-- CellButton
+
+Cell *-- CellButton
+
+
+
+@enduml
